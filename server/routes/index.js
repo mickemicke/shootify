@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 
 // // middleware that is specific to this router
@@ -9,15 +10,15 @@ const router = express.Router();
 
 // define the home page route
 router.use("/users", (req, res) => {
-  res.send('users page');
+  res.send("users page");
 });
 
 router.get("/users", (req, res) => {
-  res.send('all users')
-})
+  res.send("all users");
+});
 
-router.get('/users/:id', (req, res) => {
-  res.send('one user')
-})
+router.get("/users/:id", (req, res) => {
+  res.send("one user");
+});
 
 module.exports = router;

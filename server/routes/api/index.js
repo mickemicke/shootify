@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const apiRoutes = require("./api/index");
+const userRoutes = require("./users/index");
 // // middleware that is specific to this router
 // router.use(function timeLog(req, res, next) {
 //   console.log("Time: ", Date.now());
@@ -10,13 +10,8 @@ const apiRoutes = require("./api/index");
 
 // define the home page route
 router.get("/", (req, res) => {
-  res.send("homepage");
+  res.send("api");
 });
-
-router.get("/users", (req, res) => {
-  res.send("all users");
-});
-
-router.use("/api", apiRoutes);
+router.use("/users", userRoutes);
 
 module.exports = router;

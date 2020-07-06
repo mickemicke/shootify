@@ -3,12 +3,9 @@ const express = require("express");
 const router = express.Router();
 const userRoutes = require("./users/index");
 const login = require("./auth/login");
+const logout = require("./auth/logout");
 const register = require("./auth/register");
-// // middleware that is specific to this router
-// router.use(function timeLog(req, res, next) {
-//   console.log("Time: ", Date.now());
-//   next();
-// });
+const authcheck = require("./auth/authcheck");
 
 // define the home page route
 router.get("/", (req, res) => {
@@ -16,6 +13,8 @@ router.get("/", (req, res) => {
 });
 router.use("/users", userRoutes);
 router.use("/login", login);
+router.use("/logout", logout);
 router.use("/register", register);
+router.use("/authcheck", authcheck);
 
 module.exports = router;

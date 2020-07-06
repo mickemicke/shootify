@@ -10,11 +10,7 @@ const apiRoutes = require("./api/index");
 
 // define the home page route
 router.get("/", (req, res) => {
-  res.send("homepage");
-});
-
-router.get("/users", (req, res) => {
-  res.send("all users");
+  res.send();
 });
 
 router.use("/api", apiRoutes);

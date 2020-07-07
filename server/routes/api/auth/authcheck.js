@@ -2,11 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
   if (req.user) {
-    return res.status(200).send(`user ${req.user} is authorized`);
+    return res.status(200).send(req.user);
   }
-  return res.status(401).send("unauthorized");
+  return res.status(401).send(false);
 });
 
 module.exports = router;

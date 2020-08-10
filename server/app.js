@@ -32,6 +32,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 app.use(express.static("public"));
@@ -58,5 +59,5 @@ app.get("/", (req, res) => {
 app.use("/api", apiRoutes);
 
 app.listen(port, () => {
-  console.log("Server has started!");
+  console.log(`Server has started on ${port}!`);
 });

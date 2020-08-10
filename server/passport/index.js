@@ -6,8 +6,7 @@ const UserModel = require("../models/user.model");
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const user = await UserModel.findOne({ username });
-
+      const user = await UserModel.findOne({ username }).lean();
       if (!user) {
         return done(null, false, { message: "No user found" });
       }
@@ -19,6 +18,8 @@ passport.use(
       if (!matchedPasswords) {
         return done(null, false, { message: "Invalid credentials" });
       }
+      // remove password from user before sending to client
+      delete user.password;
       return done(null, user);
     } catch (error) {
       return done(error);
@@ -27,13 +28,16 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.username);
+  return done(null, user.username);
 });
 
 passport.deserializeUser(async (username, done) => {
   try {
-    const user = await UserModel.findOne({ username });
-    return done(null, user.username);
+    const user = await UserModel.findOne({ username }).lean();
+    // remove the password from authcheck
+    // doesn't affect login
+    delete user.password;
+    return done(null, user);
   } catch (error) {
     return done(error);
   }

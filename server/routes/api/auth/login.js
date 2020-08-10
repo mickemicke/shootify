@@ -15,7 +15,7 @@ router.post("/", (req, res, next) => {
       if (e) {
         return next(e);
       }
-      return res.send(`user ${user.username} is authorized`);
+      return res.send(user);
     });
   })(req, res, next);
 });

@@ -2,11 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
-router.post("/", (req, res) => {
-  if (req.user) {
-    req.logout();
-  }
-  res.status(200).send();
+router.get("/", (req, res) => {
+  req.logout();
+  res.clearCookie("connect.sid");
+  req.session.destroy(() => res.status(200).send("logged out"));
 });
 
 module.exports = router;
